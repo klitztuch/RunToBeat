@@ -1,3 +1,6 @@
+using System.Threading.Tasks;
+using SpotifyAPI.Web;
+
 namespace RunToBeat.Api.Services
 {
     /// <summary>
@@ -5,6 +8,6 @@ namespace RunToBeat.Api.Services
     /// </summary>
     public interface ISpotifyService
     {
-        
+        Task<FullTrack> GetTrackById(string id);
     }
 }

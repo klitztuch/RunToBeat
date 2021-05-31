@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RunToBeat.Api.Services;
 
 namespace RunToBeat.Api
 {
@@ -31,6 +32,10 @@ namespace RunToBeat.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "RunToBeat.Api", Version = "v1"});
             });
+            
+            // Add services
+            services.AddScoped<ISpotifyAuthenticationService, SpotifyAuthenticationService>(_ => new SpotifyAuthenticationService(Configuration["Spotify:ClientId"], Configuration["Spotify:ClientSecret"]));
+            services.AddScoped<ISpotifyService, SpotifyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
