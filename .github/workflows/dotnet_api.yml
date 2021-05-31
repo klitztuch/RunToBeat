@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build RunToBeat.Api.csproj --no-restore
+      run: dotnet build RunToBeat.Api/RunToBeat.Api.csproj --no-restore
     - name: Test
-      run: dotnet test RunToBeat.Api.csproj --no-build --verbosity normal
+      run: dotnet test RunToBeat.Api.UnitTest/RunToBeat.Api.UnitTest.csproj --no-build --verbosity normal
