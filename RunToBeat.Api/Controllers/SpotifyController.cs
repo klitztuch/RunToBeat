@@ -7,6 +7,9 @@ using SpotifyAPI.Web;
 
 namespace RunToBeat.Api.Controllers
 {
+    /// <summary>
+    /// Implements a controller for Spotify interaction
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class SpotifyController : ControllerBase
@@ -14,6 +17,11 @@ namespace RunToBeat.Api.Controllers
         private readonly ILogger<SpotifyController> _logger;
         private readonly ISpotifyService _spotifyService;
 
+        /// <summary>
+        /// Creates a new <see cref="SpotifyController"/>-object.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="spotifyService"></param>
         public SpotifyController(ILogger<SpotifyController> logger, ISpotifyService spotifyService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -21,10 +29,10 @@ namespace RunToBeat.Api.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Gets a track by id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">the track id</param>
+        /// <returns>the full track</returns>
         [HttpGet]
         public async Task<ActionResult<FullTrack>> Get(string id)
         {

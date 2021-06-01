@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,10 +26,18 @@ namespace RunToBeat.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "RunToBeat.Api", Version = "v1"});
             });
-            
-            // Add services
-            services.AddScoped<ISpotifyAuthenticationService, SpotifyAuthenticationService>(_ => new SpotifyAuthenticationService(Configuration["Spotify:ClientId"], Configuration["Spotify:ClientSecret"]));
+
+            // Add spotify services
+            services.AddScoped<ISpotifyAuthenticationService, SpotifyAuthenticationService>(_ =>
+                new SpotifyAuthenticationService(Configuration["Spotify:ClientId"],
+                    Configuration["Spotify:ClientSecret"]));
             services.AddScoped<ISpotifyService, SpotifyService>();
+            // Add happi.dev services
+            services.AddScoped<IHappiDevMusicService, HappiDevMusicService>(provider =>
+                new HappiDevMusicService(
+                    Configuration["HappiDev:ApiKey"],
+                    Configuration["HappiDevUrl"],
+                    provider.GetService<ILogger<HappiDevMusicService>>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
