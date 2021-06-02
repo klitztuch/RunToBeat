@@ -11,16 +11,32 @@ namespace RunToBeat.Api
 {
     public class Startup
     {
+        private string _spotifyClientId;
+        private string _happiDevApiKey;
+        private string _spotifyClientSecret;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        ///     Configuration property
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        ///     This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // declare configuration variables
+            // if env vars are not set take secrets file 
+            _spotifyClientId = Configuration["SPOTIFY_CLIENT_ID"] ?? Configuration["Spotify:ClientId"];
+            _spotifyClientSecret = Configuration["SPOTIFY_CLIENT_SECRET"] ?? Configuration["Spotify:ClientSecret"];
+            _happiDevApiKey = Configuration["HAPPI_DEV_API_KEY"] ?? Configuration["HappiDev:ApiKey"];
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -29,13 +45,13 @@ namespace RunToBeat.Api
 
             // Add spotify services
             services.AddScoped<ISpotifyAuthenticationService, SpotifyAuthenticationService>(_ =>
-                new SpotifyAuthenticationService(Configuration["Spotify:ClientId"],
-                    Configuration["Spotify:ClientSecret"]));
+                new SpotifyAuthenticationService(_spotifyClientId,
+                    _spotifyClientSecret));
             services.AddScoped<ISpotifyService, SpotifyService>();
             // Add happi.dev services
             services.AddScoped<IHappiDevMusicService, HappiDevMusicService>(provider =>
                 new HappiDevMusicService(
-                    Configuration["HappiDev:ApiKey"],
+                    _happiDevApiKey,
                     Configuration["HappiDevUrl"],
                     provider.GetService<ILogger<HappiDevMusicService>>()));
         }
