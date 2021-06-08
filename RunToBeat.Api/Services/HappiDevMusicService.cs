@@ -19,6 +19,12 @@ namespace RunToBeat.Api.Services
         private readonly string _baseUrl;
         private readonly string _apiKey;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="baseUrl"></param>
+        /// <param name="apiKey"></param>
+        /// <param name="logger"></param>
         public HappiDevMusicService(string baseUrl, string apiKey,ILogger<HappiDevMusicService> logger = null)
         {
             _logger = logger;
