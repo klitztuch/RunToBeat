@@ -11,8 +11,8 @@ namespace RunToBeat.Api
 {
     public class Startup
     {
-        private string _spotifyClientId;
         private string _happiDevApiKey;
+        private string _spotifyClientId;
         private string _spotifyClientSecret;
 
         public Startup(IConfiguration configuration)
@@ -51,8 +51,8 @@ namespace RunToBeat.Api
             // Add happi.dev services
             services.AddScoped<IHappiDevMusicService, HappiDevMusicService>(provider =>
                 new HappiDevMusicService(
-                    _happiDevApiKey,
                     Configuration["HappiDevUrl"],
+                    _happiDevApiKey,
                     provider.GetService<ILogger<HappiDevMusicService>>()));
         }
 
