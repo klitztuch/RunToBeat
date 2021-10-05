@@ -1,4 +1,4 @@
-﻿using System;
+﻿using RunToBeat.UI.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +11,8 @@ namespace RunToBeat
         public App()
         {
             InitializeComponent();
+
+            XF.Material.Forms.Material.Init(this);
 
             MainPage = new MainPage();
         }
