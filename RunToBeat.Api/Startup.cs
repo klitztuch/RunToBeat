@@ -49,7 +49,7 @@ namespace RunToBeat.Api
                     _spotifyClientSecret));
             services.AddScoped<ISpotifyService, SpotifyService>();
             // Add happi.dev services
-            services.AddScoped<IHappiDevMusicService, HappiDevMusicService>(provider =>
+            services.AddScoped<IBpmService, HappiDevMusicService>(provider =>
                 new HappiDevMusicService(
                     Configuration["HappiDevUrl"],
                     _happiDevApiKey,

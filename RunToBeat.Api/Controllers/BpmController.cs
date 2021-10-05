@@ -17,7 +17,7 @@ namespace RunToBeat.Api.Controllers
     public class BpmController : ControllerBase
     {
         private readonly ILogger<BpmController> _logger;
-        private readonly IHappiDevMusicService _musicService;
+        private readonly IBpmService _musicService;
 
         /// <summary>
         ///     Creates a new <see cref="BpmController" />-object.
@@ -25,7 +25,7 @@ namespace RunToBeat.Api.Controllers
         /// <param name="logger"></param>
         /// <param name="musicService"></param>
         public BpmController(ILogger<BpmController> logger,
-            IHappiDevMusicService musicService)
+            IBpmService musicService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _musicService = musicService ?? throw new ArgumentNullException(nameof(musicService));
