@@ -11,23 +11,13 @@
 
     <ItemGroup>
         <PackageReference Include="SpotifyAPI.Web" Version="6.2.0" />
-        <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+        <PackageReference Include="XF.Material" Version="1.7.8" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pages\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Update="Views\MainPage.xaml">
-        <SubType>Designer</SubType>
-        <Generator></Generator>
-      </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Views\MainPage.xaml.cs">
-        <DependentUpon>MainPage.xaml</DependentUpon>
-      </Compile>
+      <ProjectReference Include="..\..\RunToBeat.Core\RunToBeat.Core.csproj" />
+      <ProjectReference Include="..\..\RunToBeat.UI\RunToBeat.UI.csproj" />
     </ItemGroup>
 </Project>
