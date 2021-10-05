@@ -11,9 +11,9 @@ using RunToBeat.Api.Model;
 namespace RunToBeat.Api.Services
 {
     /// <summary>
-    /// Implements <see cref="IHappiDevMusicService"/>
+    /// Implements <see cref="IBpmService"/>
     /// </summary>
-    public class HappiDevMusicService : IHappiDevMusicService
+    public class HappiDevMusicService : IBpmService
     {
         private readonly ILogger<HappiDevMusicService> _logger;
         private readonly string _baseUrl;
